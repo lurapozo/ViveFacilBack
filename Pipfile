@@ -1,0 +1,27 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+asgiref = "==3.2.10"
+django = ">=3"
+django-filter = "==2.3.0"
+djangorestframework = ">=3.12"
+pillow = "==7.2.0"
+psycopg2 = "==2.8.5"
+pytz = "==2020.1"
+sqlparse = "==0.3.1"
+django-cors-headers = "*"
+django-allauth = "*"
+fcm-django = "*"
+django-rest-auth = "*"
+django-naomi = "*"
+django-inlinecss = "*"
+mysqlclient = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"
+python_full_version = "3.8.0"
