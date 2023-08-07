@@ -12,10 +12,15 @@ urlpatterns += [
     path('cardAuth_delete/<str:token>', CardsAuth.as_view()),
     path('categorias/', Categorias.as_view()),
     path('insignias/', Insignias.as_view()),
+    path('medallas/', Medallas.as_view()),
+    path('medalla_update/<str:id>', Medallas.as_view()),
+    path('insigniaspersonales/<str:id>', InsigniasPersonales.as_view()),
+    path('medallaspersonales/<str:id>', MedallasPersonales.as_view()),
     path('insignia_update/<str:id>', Insignias.as_view()),
     path('insignia_delete/<str:id>', Insignias.as_view()),
     path('insignias/<str:pk>', Insignia_Details.as_view()),
     path('insignia_estado/', Insignia_Details.as_view()),
+    path('medalla_estado/', Medalla_Details.as_view()),
     path('insignias_proveedor/', InsigniasProveedor.as_view()),
     path('insignias_solicitantes/', InsigniaSolicitantes.as_view()),
     path('suggestions/', Suggestions.as_view()),
@@ -23,7 +28,7 @@ urlpatterns += [
     path('unread-suggestions/', UnreadSuggestions.as_view()),
     path('suggestion/<str:pk>', Suggestions_Details.as_view()),
     path('post-token/', DeviceNotification.as_view()),
-    path('dispositivos-notificacion/', DeviceNotification.as_view()),           #Created by Kevin
+    path('dispositivos-notificacion/', DeviceNotification.as_view()),
     path('categoria_update/<str:id>', Categorias.as_view()),
     path('categoria_delete/<str:id>', Categorias.as_view()),
     path('servicios/', Servicios.as_view()),
@@ -38,23 +43,23 @@ urlpatterns += [
     path('solicitud/<str:solicitud_ID>', Solicituds.as_view()),
     path('solicitudID/<str:solicitud_ID>', SolicitudID.as_view()),
     path('solicitudes/<str:user>', Solicitudes.as_view()),
-    path('solicitudes_espera/<str:correo>', SolicitudesPending.as_view()),      #Created by Kevin para Solicitante
-    path('solicitudes_pasadas/<str:correo>', SolicitudesPast.as_view()),        #Created by Kevin para Solicitante
-    path('solicitudes_paid/<str:correo>', SolicitudesPaid.as_view()),           #Created by Kevin para Solicitante
-    path('solicitudes_no_paid/<str:correo>', SolicitudesNoPaid.as_view()),      #Created by Kevin para Solicitante
-    path('solicitudes_esperaPag/<str:correo>',SolicitudesPendingPag.as_view()), #Created by Kevin para Solicitante
-    path('solicitudes_pasadasPag/<str:correo>', SolicitudesPastPag.as_view()),  #Created by Kevin para Solicitante
-    path('solicitudes_paidPag/<str:correo>',SolicitudesPaidPag.as_view()),      #Created by Kevin para Solicitante
-    path('solicitudes_no_paidPag/<str:correo>', SolicitudesNoPaidPag.as_view()),#Created by Kevin para Solicitante
+    path('solicitudes_espera/<str:correo>', SolicitudesPending.as_view()),      # para Solicitante
+    path('solicitudes_pasadas/<str:correo>', SolicitudesPast.as_view()),        # para Solicitante
+    path('solicitudes_paid/<str:correo>', SolicitudesPaid.as_view()),           # para Solicitante
+    path('solicitudes_no_paid/<str:correo>', SolicitudesNoPaid.as_view()),      # para Solicitante
+    path('solicitudes_esperaPag/<str:correo>',SolicitudesPendingPag.as_view()), # para Solicitante
+    path('solicitudes_pasadasPag/<str:correo>', SolicitudesPastPag.as_view()),  # para Solicitante
+    path('solicitudes_paidPag/<str:correo>',SolicitudesPaidPag.as_view()),      # para Solicitante
+    path('solicitudes_no_paidPag/<str:correo>', SolicitudesNoPaidPag.as_view()),# para Solicitante
     path('proveedores/', Proveedores.as_view()),
-    # path('proveedor/<str:pk>', Proveedores_Details.as_view()),                #Commented by Kevin - este endpoint es una basura.
+    # path('proveedor/<str:pk>', Proveedores_Details.as_view()),                #este endpoint es una basura.
     path('providers-search/<str:user>', Proveedores_Search_Name.as_view()),
     path('dates-providers/', Proveedores_Filter_Date.as_view()),
     path('proveedor_estado/<str:id>', Proveedores.as_view()),
     path('proveedor_delete/<str:id>', Proveedores.as_view()),
     path('dato/<str:user>', Dato.as_view()),
-    path('datos/', DatosUsers.as_view()),                                       #Created By Kevin
-    path('usuarios/', Usuarios.as_view()),                                      #Created By Kevin
+    path('datos/', DatosUsers.as_view()),
+    path('usuarios/', Usuarios.as_view()),
     path('datoRedes/<str:user>', RegistroFromRedes.as_view()),
     path('profesiones/', Profesiones.as_view()),
     path('profesion/<str:pk>',ProfesionDetails.as_view()),
@@ -68,7 +73,7 @@ urlpatterns += [
     path('envio/<str:solicitud_ID>/<str:user>', Envio.as_view()),
     path('envio_interesados/<str:solicitud_ID>', Envio_Interesado.as_view()),
     path('solicitante/<str:user>', SolicitanteUser.as_view()),
-    path('solicitanteByUserDatosID/<str:UserDatosId>', SolicitanteByUserDatos.as_view()), #Kevin Endopint Add
+    path('solicitanteByUserDatosID/<str:UserDatosId>', SolicitanteByUserDatos.as_view()), #Endopint Add
     path('solicitantes/', Solicitantes.as_view()),
     path('fechas-filtro/', SolicitantesFilter.as_view()),
     path('filtro-usuario/<str:user>', FiltroNombres.as_view()),
@@ -84,19 +89,26 @@ urlpatterns += [
     path('administrador_delete/<str:id>', Administradores.as_view()),
     path('addsolicitud/' , AddSolicitud.as_view()),
     path('proveedores_pendientes/', Proveedores_Pendientes.as_view()),
+    path('proveedores_rechazados/', Proveedores_Rechazados.as_view()),
+    path('proveedores_proveedores/', Proveedores_Proveedores.as_view()),
+    path('proveedores_proveedores/<str:pk>', Proveedores_Proveedores_Details.as_view()),
     path('pendientes-search/<str:user>', Pendientes_Search_Name.as_view()),
     path('pendientes-filterDate/', Pendientes_FilterDate.as_view()),
     path('proveedor_pendientes/', Proveedores_Pendientes.as_view()),
     path('proveedor_pendiente/', Proveedor_Pendiente_Admin.as_view()),
     path('proveedores_pendientes/<str:pk>', Proveedores_Pendientes_Details.as_view()),
+    path('proveedores_pendientes2/<str:pk>', Proveedores_Pendientes_Details2.as_view()),
+    path('proveedores_rechazados/<str:pk>', Proveedores_Rechazados_Details.as_view()),
     path('proveedores_pendientes/<str:username>/<str:desc>', Proveedores_Pendientes.as_view()),
     path('documentos_proveedor/<str:username>', Documentos_proveedor.as_view()),
     path('cuenta_proveedor/<proveedorID>', CuentaProveedor.as_view()),
     path('register_proveedor/', Register_Proveedor.as_view()),
     path('proveedor_pendiente/', Data_Proveedor_Pendiente.as_view()),
+    path('proveedor_proveedor/', Data_Proveedor_Proveedor.as_view()),
     path('update_pendiente/', Update_Proveedor_Pendiente.as_view()),
     path('email/', Email.as_view()),
     path('login/', Login.as_view()),
+    path('loginadmin/', LoginAdmin.as_view()),
     path('changePassword/<str:access_security>', ChangePassword.as_view()),
     path('adjudicarsolicitud/<str:solicitud_ID>', AdjudicarSolicitud.as_view()),
     path('solicitud_adjudicada/<str:solicitud_ID>', SolicitudAdjudicada.as_view()),
@@ -104,12 +116,26 @@ urlpatterns += [
     path('tarjeta/<str:identifier>', TarjetaUser.as_view()),
     path('dato_usuario/<str:id>',Datos_Users.as_view()),
     path('complete_dato/<str:username>', Complete_Data_User.as_view()),
-    path('proveedores_servicio/<str:servicio_id>', ProveedoresByProfesion.as_view()),
-    path('proveedores_interesados/<str:id_proveedor_user_datos>', Proveedores_Interesados.as_view()),
+    path('proveedores_servicio/<str:servicio_id>',
+         ProveedoresByProfesion.as_view()),
+    # ! Quitar, ya no se va a usar
+    path('proveedores_interesados/<str:id_proveedor_user_datos>',
+         Proveedores_Interesados.as_view()),
+    path('proveedores_interesadosFecha/<str:id_proveedor_user_datos>',
+         Proveedores_InteresadosFecha.as_view()),
+
+    # Paginado
+    path('proveedores_interesadosPag/<str:id_proveedor_user_datos>',
+         Proveedores_Interesados_Pag.as_view()),
+    path('proveedores_interesadosEfectivoPag/<str:id_proveedor_user_datos>',
+         Proveedores_Interesados_Efectivo_Pag.as_view()),
+    path('proveedores_interesadosTarjetaPag/<str:id_proveedor_user_datos>',
+         Proveedores_Interesados_Tarjeta_Pag.as_view()),
     path('solicitudes-pagadas/<str:id>', SolicitudesPagadas.as_view()),
     path('notificaciones/', Notificaciones.as_view()),
     path('notificaciones/<str:id>', Notificaciones.as_view()),
-    path('notificacion_chat',Notificacion_Chat.as_view()),
+    path('notificacion_chat/',Notificacion_Chat.as_view()),
+    path('notificacion_chat_proveedor/',Notificacion_Chat_Proveedor.as_view()),
     path('notificacion_general',Notificacion_General.as_view()),
     path('promociones/', Promociones.as_view()),
     path('promociones/<str:pk>', Promocion_Details.as_view()),
@@ -167,11 +193,12 @@ urlpatterns += [
     path('proveedores_registro/', ProveedorRegistro.as_view()),
     path('edicion_proveedor/', ProveedorEdicion.as_view()),
     path('notificacion-anuncio/', SendNotificacion.as_view()),
-    path('notificacion-anuncio/<str:id>', SendNotificacion.as_view()), #Kevin
+    path('notificacion-anuncio/<str:id>', SendNotificacion.as_view()),
     path('roles-permisos/', RolesPermisos.as_view()),
     path('roles-permisos/<str:id>', RolesPermisos.as_view()),
     path('obtener-proveedor/<str:pk>', Get_Proveedor.as_view()),
     path('datos-proveedor/<str:user>', Get_ProveedorByUser.as_view()),
+    path('datos-admin/<str:user>', Get_AdminByUser.as_view()),
     path('solicitudes-proveedores/', SolicitudProfesionProveedor.as_view()),
     path('solicitudes-proveedores/<str:user>', SolicitudByName.as_view()),
     path('solicitud-profesion/<str:pk>', SolicitudDetails.as_view()),
@@ -188,7 +215,8 @@ urlpatterns += [
     path('cargo_update/<str:id>', Cargos.as_view()),
     path('valor_total_provider/', ValorTotalProveedores.as_view()),
     path('profesion_proveedor/<str:proveedor_id>',ProfesionProveedor.as_view()),
-
+    path('puntos/<str:email>',Puntos.as_view()),
+    path('politica/',Politica.as_view()),
 
     # path('pagos/', Pagos.as_view()),
     # path('send_correo/', EnviarCorreoProveedor.as_view()),
